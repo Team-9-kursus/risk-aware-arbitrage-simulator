@@ -1,9 +1,4 @@
-FROM node:20-alpine
-
-WORKDIR /app
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["sh", "-c", "echo 'Frontend placeholder running' && sleep infinity"]
+# frontend/Dockerfile
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
