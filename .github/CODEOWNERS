@@ -21,6 +21,7 @@
 
 # ---- Technical docs ----
 /docs/                         @henrikeskkula @RPK16
+/docs/DESIGN.md   @carinaruut @LuckyJaguar
 
 # ---- Infrastructure ----
 /docker-compose.yml             @henrikeskkula @NotoriousElmo
