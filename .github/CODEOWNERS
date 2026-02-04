@@ -1,1 +1,57 @@
-@henrikeskkula
+# =========================================================
+# CODEOWNERS - Risk-Aware Arbitrage Simulator (Team-9)
+# Ownership aligns with Project Brief v1.1 roles.
+# =========================================================
+
+# ---- Global fallback (someone is always responsible) ----
+* @henrikeskkula
+
+# ---- Repo governance / CI ----
+/.github/                     @henrikeskkula @markus
+/.github/workflows/           @henrikeskkula @markus
+/.vscode/                     @henrikeskkula
+
+# ---- Root docs (project governance) ----
+/README.md                    @henrikeskkula @ott-eerik
+/PROJECT_BRIEF.md             @henrikeskkula @ott-eerik
+/NON_GOALS.md                 @henrikeskkula @ott-eerik
+/ASSUMPTIONS.md               @henrikeskkula @ott-eerik
+/DECISIONS.md                 @henrikeskkula @ott-eerik
+/ARCHITECTURE.md              @henrikeskkula @markus
+
+# ---- Technical docs ----
+/docs/                        @henrikeskkula @ott-eerik
+
+# ---- Infrastructure ----
+/docker-compose.yml            @henrikeskkula @markus
+/infra/                        @henrikeskkula @markus
+/infra/nginx/                  @henrikeskkula @markus
+/infra/scripts/                @henrikeskkula @markus
+
+# ---- Backend (Spring Boot) ----
+/backend/                      @henrikeskkula @markus
+/backend/pom.xml               @henrikeskkula @markus
+/backend/Dockerfile            @henrikeskkula @markus
+/backend/src/main/resources/   @henrikeskkula @markus
+
+# Backend code ownership split by responsibility
+/backend/src/main/java/com/riskaware/arbitrage/core/           @henrikeskkula @markus
+/backend/src/main/java/com/riskaware/arbitrage/core/orchestration/ @henrikeskkula @markus
+/backend/src/main/java/com/riskaware/arbitrage/core/risk/      @henrikeskkula @ott-eerik
+/backend/src/main/java/com/riskaware/arbitrage/core/reserve/   @henrikeskkula @markus
+/backend/src/main/java/com/riskaware/arbitrage/simulation/     @henrikeskkula @markus
+/backend/src/main/java/com/riskaware/arbitrage/api/            @henrikeskkula @markus
+/backend/src/main/java/com/riskaware/arbitrage/analytics/      @henrikeskkula @ott-eerik
+
+# ---- Frontend ----
+/frontend/                     @carina @laura
+/frontend/Dockerfile           @carina @laura
+/frontend/src/                 @carina @laura
+/frontend/src/pages/           @carina @laura
+/frontend/src/pages/app/       @carina @laura
+/frontend/src/pages/components/ @carina @laura
+/frontend/src/stores/          @carina @laura
+/frontend/src/api/             @carina @laura
+
+# ---- Ignore build artifacts (should not be in repo) ----
+/backend/target/               @henrikeskkula
