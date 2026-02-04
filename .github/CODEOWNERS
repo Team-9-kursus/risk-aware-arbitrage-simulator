@@ -7,51 +7,51 @@
 * @henrikeskkula
 
 # ---- Repo governance / CI ----
-/.github/                     @henrikeskkula @markus
-/.github/workflows/           @henrikeskkula @markus
-/.vscode/                     @henrikeskkula
+/.github/                      @henrikeskkula @NotoriousElmo
+/.github/workflows/            @henrikeskkula @NotoriousElmo
+/.vscode/                      @henrikeskkula
 
 # ---- Root docs (project governance) ----
-/README.md                    @henrikeskkula @ott-eerik
-/PROJECT_BRIEF.md             @henrikeskkula @ott-eerik
-/NON_GOALS.md                 @henrikeskkula @ott-eerik
-/ASSUMPTIONS.md               @henrikeskkula @ott-eerik
-/DECISIONS.md                 @henrikeskkula @ott-eerik
-/ARCHITECTURE.md              @henrikeskkula @markus
+/README.md                     @henrikeskkula @RPK16
+/PROJECT_BRIEF.md              @henrikeskkula @RPK16
+/NON_GOALS.md                  @henrikeskkula @RPK16
+/ASSUMPTIONS.md                @henrikeskkula @RPK16
+/DECISIONS.md                  @henrikeskkula @RPK16
+/ARCHITECTURE.md               @henrikeskkula @NotoriousElmo
 
 # ---- Technical docs ----
-/docs/                        @henrikeskkula @ott-eerik
+/docs/                         @henrikeskkula @RPK16
 
 # ---- Infrastructure ----
-/docker-compose.yml            @henrikeskkula @markus
-/infra/                        @henrikeskkula @markus
-/infra/nginx/                  @henrikeskkula @markus
-/infra/scripts/                @henrikeskkula @markus
+/docker-compose.yml             @henrikeskkula @NotoriousElmo
+/infra/                         @henrikeskkula @NotoriousElmo
+/infra/nginx/                   @henrikeskkula @NotoriousElmo
+/infra/scripts/                 @henrikeskkula @NotoriousElmo
 
 # ---- Backend (Spring Boot) ----
-/backend/                      @henrikeskkula @markus
-/backend/pom.xml               @henrikeskkula @markus
-/backend/Dockerfile            @henrikeskkula @markus
-/backend/src/main/resources/   @henrikeskkula @markus
+/backend/                       @henrikeskkula @NotoriousElmo
+/backend/pom.xml                @henrikeskkula @NotoriousElmo
+/backend/Dockerfile             @henrikeskkula @NotoriousElmo
+/backend/src/main/resources/    @henrikeskkula @NotoriousElmo
 
 # Backend code ownership split by responsibility
-/backend/src/main/java/com/riskaware/arbitrage/core/           @henrikeskkula @markus
-/backend/src/main/java/com/riskaware/arbitrage/core/orchestration/ @henrikeskkula @markus
-/backend/src/main/java/com/riskaware/arbitrage/core/risk/      @henrikeskkula @ott-eerik
-/backend/src/main/java/com/riskaware/arbitrage/core/reserve/   @henrikeskkula @markus
-/backend/src/main/java/com/riskaware/arbitrage/simulation/     @henrikeskkula @markus
-/backend/src/main/java/com/riskaware/arbitrage/api/            @henrikeskkula @markus
-/backend/src/main/java/com/riskaware/arbitrage/analytics/      @henrikeskkula @ott-eerik
+/backend/src/main/java/com/riskaware/arbitrage/core/                @henrikeskkula @NotoriousElmo
+/backend/src/main/java/com/riskaware/arbitrage/core/orchestration/  @henrikeskkula @NotoriousElmo
+/backend/src/main/java/com/riskaware/arbitrage/core/risk/           @henrikeskkula @RPK16
+/backend/src/main/java/com/riskaware/arbitrage/core/reserve/        @henrikeskkula @NotoriousElmo
+/backend/src/main/java/com/riskaware/arbitrage/simulation/          @henrikeskkula @NotoriousElmo
+/backend/src/main/java/com/riskaware/arbitrage/api/                 @henrikeskkula @NotoriousElmo
+/backend/src/main/java/com/riskaware/arbitrage/analytics/           @henrikeskkula @RPK16
 
 # ---- Frontend ----
-/frontend/                     @carina @laura
-/frontend/Dockerfile           @carina @laura
-/frontend/src/                 @carina @laura
-/frontend/src/pages/           @carina @laura
-/frontend/src/pages/app/       @carina @laura
-/frontend/src/pages/components/ @carina @laura
-/frontend/src/stores/          @carina @laura
-/frontend/src/api/             @carina @laura
+/frontend/                      @carinaruut @LuckyJaguar
+/frontend/Dockerfile            @carinaruut @LuckyJaguar
+/frontend/src/                  @carinaruut @LuckyJaguar
+/frontend/src/pages/            @carinaruut @LuckyJaguar
+/frontend/src/pages/app/        @carinaruut @LuckyJaguar
+/frontend/src/pages/components/ @carinaruut @LuckyJaguar
+/frontend/src/stores/           @carinaruut @LuckyJaguar
+/frontend/src/api/              @carinaruut @LuckyJaguar
 
 # ---- Ignore build artifacts (should not be in repo) ----
-/backend/target/               @henrikeskkula
+/backend/target/                @henrikeskkula
