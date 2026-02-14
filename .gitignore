@@ -25,6 +25,8 @@ dist/
 build/
 .cache/
 .parcel-cache/
+.tanstack/
+frontend/src/routeTree.gen.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
