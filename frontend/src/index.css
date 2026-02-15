@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-primary-700: #0f3dff;
+  --color-primary-500: #2f6bff;
+  --color-primary-300: #8fa9ff;
+
+  --color-bg-dark: #0b0f1a;
+  --color-bg-panel: #111827;
+  --color-bg-light: #f9fafb;
+
+  --color-text-primary: #e5e7eb;
+  --color-text-muted: #9ca3af;
+  --color-text-dark: #111827;
+
+  --color-border: #1f2937;
+  --color-divider: #374151;
+  --color-icon: #cbd5e1;
+
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #38bdf8;
+
+  --radius: 8px;
+  --transition: 0.2s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+p {
+  font-size: 18px;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1328px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 1280px) {
+  .app-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
+}
+
+.card {
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.btn-primary {
+  background-color: var(--color-primary-500);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-700);
+}
+
+.bg-gradient-brand {
+  background: linear-gradient(135deg, #2f6bff 0%, #0f3dff 50%, #0b1dbf 100%);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.border-divider {
+  border-color: var(--color-divider);
+}
