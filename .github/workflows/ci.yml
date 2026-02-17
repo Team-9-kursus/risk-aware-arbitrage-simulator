@@ -22,8 +22,10 @@ jobs:
           filters: |
             frontend:
               - 'frontend/**'
+              - '.github/workflows/**'
             backend:
               - 'backend/**'
+              - '.github/workflows/**'
 
   frontend-ci:
     timeout-minutes: 15
