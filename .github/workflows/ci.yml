@@ -29,10 +29,24 @@ jobs:
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
 
+<<<<<<< Updated upstream
       - run: pnpm install --frozen-lockfile
       - run: pnpm dlx @tanstack/router-cli generate
       - run: pnpm lint
       - run: pnpm build
+=======
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate route tree
+        run: pnpm dlx @tanstack/router-cli generate
+
+      - name: Run type check & build
+        run: pnpm build        
+
+      - name: Run linter
+        run: pnpm lint
+>>>>>>> Stashed changes
 
   backend-ci:
     name: Backend CI
@@ -50,4 +64,8 @@ jobs:
 
       - name: Build backend
         working-directory: backend
+<<<<<<< Updated upstream
         run: mvn -q -DskipTests clean compile
+=======
+        run: ./mvnw -q -DskipTests clean package
+>>>>>>> Stashed changes
