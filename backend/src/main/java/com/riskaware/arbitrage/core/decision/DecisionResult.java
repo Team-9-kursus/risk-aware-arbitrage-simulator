@@ -1,5 +1,6 @@
 package com.riskaware.arbitrage.core.decision;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class DecisionResult {
@@ -41,7 +42,49 @@ public final class DecisionResult {
 
         public Builder addReason(DecisionReason r) {
             this.reason = r;
+            putDetailReason(r);
             return this;
+        }        
+
+        @SuppressWarnings("unchecked")
+        private void putDetailReason(DecisionReason r) {
+            if (this.details == null) this.details = new LinkedHashMap<>();
+            var key = "reasons";
+            var existing = this.details.get(key);
+            if (existing == null) {
+                this.details.put(key, new java.util.ArrayList<>(java.util.List.of(r.name())));
+                return;
+            }
+            if (existing instanceof java.util.List<?> list) {
+                ((java.util.List<Object>) list).add(r.name());
+            }
+        }        
+
+        // --- Compatibility with DecisionEngine explainability/details ---
+        public Builder explain(String explain) {
+            // DecisionEngine kasutab "explain" välja; map'ime selle message alla.
+            this.message = explain;
+            return this;
+        }
+
+        public Builder riskScore(Double riskScore) {
+            putDetail("riskScore", riskScore);
+            return this;
+        }
+
+        public Builder reserveLimitExceeded(Boolean reserveLimitExceeded) {
+            putDetail("reserveLimitExceeded", reserveLimitExceeded);
+            return this;
+        }
+
+        public Builder allocationFeasible(Boolean allocationFeasible) {
+            putDetail("allocationFeasible", allocationFeasible);
+            return this;
+        }
+
+        private void putDetail(String key, Object value) {
+            if (this.details == null) this.details = new LinkedHashMap<>();
+            this.details.put(key, value);
         }        
 
         public Builder allowed(boolean allowed) {
