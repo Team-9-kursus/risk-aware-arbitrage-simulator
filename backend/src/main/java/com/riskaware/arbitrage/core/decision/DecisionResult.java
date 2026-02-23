@@ -33,6 +33,17 @@ public final class DecisionResult {
         private String message;
         private Map<String, Object> details;
 
+        // --- Compatibility with DecisionEngine API ---
+        public Builder go(boolean go) {
+            this.allowed = go;
+            return this;
+        }
+
+        public Builder addReason(DecisionReason r) {
+            this.reason = r;
+            return this;
+        }        
+
         public Builder allowed(boolean allowed) {
             this.allowed = allowed;
             return this;
