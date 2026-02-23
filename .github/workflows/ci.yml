@@ -11,19 +11,51 @@ jobs:
     name: Detect changes
     runs-on: ubuntu-latest
     outputs:
-      frontend: ${{ steps.filter.outputs.frontend }}
-      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.detect.outputs.frontend }}
+      backend: ${{ steps.detect.outputs.backend }}
     steps:
       - uses: actions/checkout@v4
-
-      - id: filter
-        uses: dorny/paths-filter@v3
         with:
-          filters: |
-            frontend:
-              - 'frontend/**'
-            backend:
-              - 'backend/**'
+          fetch-depth: 0
+
+      - id: detect
+        name: Detect changed paths
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Determine diff range
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+          else
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          fi
+
+          echo "Diff range: $base..$head"
+
+          # If base is empty (rare), assume everything changed
+          if [[ -z "${base:-}" || "${base}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "frontend=true" >> "$GITHUB_OUTPUT"
+            echo "backend=true"  >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          files="$(git diff --name-only "$base" "$head" || true)"
+          echo "$files"
+
+          if echo "$files" | grep -qE '^frontend/'; then
+            echo "frontend=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "frontend=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if echo "$files" | grep -qE '^backend/'; then
+            echo "backend=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "backend=false" >> "$GITHUB_OUTPUT"
+          fi
 
   frontend-ci:
     timeout-minutes: 15
@@ -84,4 +116,4 @@ jobs:
 
       - name: Build backend
         working-directory: backend
-        run: ./mvnw -q -DskipTests clean compile
+        run: ./mvnw -q -DskipTests clean package
