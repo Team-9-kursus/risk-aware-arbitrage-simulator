@@ -1,4 +1,3 @@
-```md
 # ARCHITECTURE
 ## System Architecture - risk aware arbitrage simulator
 
@@ -254,6 +253,5 @@ Without breaking existing contracts.
 > Architecture is the discipline of making correct behavior inevitable.
 
 Risk aware arbitrage simulator architecture enforces responsibility, explainability, and restraint by design.
-```
 
 ---

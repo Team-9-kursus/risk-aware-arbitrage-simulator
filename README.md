@@ -1,4 +1,3 @@
-```md
 # Risk-Aware Arbitrage Simulation Platform
 
 This is an **educational, risk-aware arbitrage simulation platform**.  
