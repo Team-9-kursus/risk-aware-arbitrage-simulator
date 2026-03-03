@@ -12,6 +12,7 @@ A modern, type-safe React application built with **React 19**, **TanStack Router
 - **Package Manager:** [pnpm](https://pnpm.io/)
 - **Linting:** ESLint 9+ (Flat Config)
 - **Formatting:** Prettier (Integrated via ESLint)
+- **Testing:** [Vitest](https://vitest.dev/)
 
 ## Project Structure
 
@@ -50,6 +51,15 @@ pnpm dev
 ```
 The application uses **File-based Routing**. When you add a new file to `src/routes/`, the `routeTree.gen.ts` will update automatically to provide full type-safety for your links and params.
 
+## Testing with Vitest
+
+Unit tests live **next to the components or pages they test** and **must end with `.test.ts` or `.test.tsx`**.
+
+### Running Tests
+```
+pnpm test
+```
+
 ## Quality Control
 
 This project uses a unified linting and formatting strategy. **`.prettierrc`** is the single source of truth for code style.
@@ -66,3 +76,4 @@ This project uses a unified linting and formatting strategy. **`.prettierrc`** i
 | `pnpm build` | Type-checks and builds for production |
 | `pnpm lint` | Checks for code errors and style violations |
 | `pnpm format` | Formats all source code using Prettier |
+| `pnpm test` | Run tests |
