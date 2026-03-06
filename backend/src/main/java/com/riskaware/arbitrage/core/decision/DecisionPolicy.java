@@ -1,35 +1,27 @@
 package com.riskaware.arbitrage.core.decision;
 
 /**
- * Seadistatavad poliitika läved GO/NO-GO otsuse jaoks.
- * Hoia loogika lihtne ja deterministlik.
+ * Policy thresholds used by the decision engine.
  */
 public final class DecisionPolicy {
 
-    /**
-     * Riskiskoor vahemikus [0..1].
-     * Kui väärtus on sellest suurem => NO-GO.
-     */
+    /** Maximum allowed risk score (0..1). */
     private final double maxRiskScore;
 
-    /**
-     * Kui true, siis blokeeritakse,
-     * kui reserve engine ütleb "limit exceeded".
-     */
+    /** Block decision if reserve limit is exceeded. */
     private final boolean blockOnReserveLimitExceeded;
 
-    /**
-     * Kui true, siis blokeeritakse,
-     * kui allocation ütleb "not feasible".
-     */
+    /** Block decision if allocation is not feasible. */
     private final boolean blockOnAllocationNotFeasible;
 
     public DecisionPolicy(double maxRiskScore,
                           boolean blockOnReserveLimitExceeded,
                           boolean blockOnAllocationNotFeasible) {
+
         if (maxRiskScore < 0.0 || maxRiskScore > 1.0) {
-            throw new IllegalArgumentException("maxRiskScore peab olema vahemikus [0..1]");
+            throw new IllegalArgumentException("maxRiskScore must be between 0 and 1");
         }
+
         this.maxRiskScore = maxRiskScore;
         this.blockOnReserveLimitExceeded = blockOnReserveLimitExceeded;
         this.blockOnAllocationNotFeasible = blockOnAllocationNotFeasible;
@@ -48,13 +40,13 @@ public final class DecisionPolicy {
     }
 
     /**
-     * Mõistlikud vaikimisi väärtused projekti jaoks.
+     * Default project policy.
      */
     public static DecisionPolicy defaults() {
         return new DecisionPolicy(
-                0.70,  // maksimaalne lubatud riskiskoor
-                true,  // blokeeri, kui reservi limiit on ületatud
-                true   // blokeeri, kui jaotus (allocation) ei ole teostatav
+                0.70,
+                true,
+                true
         );
     }
 }
