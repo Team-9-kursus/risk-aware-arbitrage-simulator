@@ -4,27 +4,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * DecisionResult esindab otsuse lõpptulemust
- * (kas simulatsioon on lubatud või blokeeritud)
- * koos põhjuse ja selgitavate detailidega.
- *
- * Immutable objekt – loodav ainult Builderi kaudu.
+ * Immutable decision result.
  */
 public final class DecisionResult {
 
-    /** Kas tegevus on lubatud (true) või blokeeritud (false). */
+    /** True if the action is allowed. */
     private final boolean allowed;
 
-    /** Peamine otsuse põhjus (enum). */
+    /** Primary decision reason. */
     private final DecisionReason reason;
 
-    /** Inimloetav selgitus (explainability). */
+    /** Human-readable explanation. */
     private final String message;
 
-    /**
-     * Lisadetailid otsuse kohta (riskiskoor, reserve info jne).
-     * Hoitakse Map kujul, et võimaldada paindlikku laiendamist.
-     */
+    /** Optional decision details. */
     private final Map<String, Object> details;
 
     private DecisionResult(boolean allowed, DecisionReason reason, String message, Map<String, Object> details) {
@@ -34,30 +27,38 @@ public final class DecisionResult {
         this.details = details;
     }
 
-    /** Kas otsus lubab edasi minna. */
-    public boolean isAllowed() { return allowed; }
+    /** Returns whether the action is allowed. */
+    public boolean isAllowed() {
+        return allowed;
+    }
+
+    /** Compatibility alias used by the pipeline. */
+    public boolean isGo() {
+        return allowed;
+    }
+
+    /** Returns the primary decision reason. */
+    public DecisionReason reason() {
+        return reason;
+    }
+
+    /** Returns the explanation message. */
+    public String message() {
+        return message;
+    }
+
+    /** Returns optional decision details. */
+    public Map<String, Object> details() {
+        return details;
+    }
+
+    /** Creates a builder instance. */
+    public static Builder builder() {
+        return new Builder();
+    }
 
     /**
-     * Backward-compat pipeline'i jaoks.
-     * Pipeline kasutab nime isGo().
-     */
-    public boolean isGo() { return allowed; }
-
-    /** Tagastab peamise otsuse põhjuse. */
-    public DecisionReason reason() { return reason; }
-
-    /** Tagastab inimloetava selgituse. */
-    public String message() { return message; }
-
-    /** Tagastab lisadetailid otsuse kohta. */
-    public Map<String, Object> details() { return details; }
-
-    /** Builder pattern kasutamiseks. */
-    public static Builder builder() { return new Builder(); }
-
-    /**
-     * Builder võimaldab samm-sammult
-     * otsuse konstruktsiooni koos explainability detailidega.
+     * Builder for DecisionResult.
      */
     public static final class Builder {
 
@@ -66,32 +67,26 @@ public final class DecisionResult {
         private String message;
         private Map<String, Object> details;
 
-        // --- Compatibility with DecisionEngine API ---
-
-        /**
-         * Alternatiivne nimetus allowed jaoks (DecisionEngine kasutab go).
-         */
+        /** Compatibility alias for allowed. */
         public Builder go(boolean go) {
             this.allowed = go;
             return this;
         }
 
-        /**
-         * Lisab otsuse põhjuse ning salvestab selle ka detailide alla.
-         */
+        /** Adds a decision reason and stores it in details. */
         public Builder addReason(DecisionReason r) {
             this.reason = r;
             putDetailReason(r);
             return this;
         }
 
-        /**
-         * Lisab põhjuse detailide kaardile massiivina ("reasons").
-         * Toetab mitut põhjust.
-         */
+        /** Adds a reason entry under "reasons". */
         @SuppressWarnings("unchecked")
         private void putDetailReason(DecisionReason r) {
-            if (this.details == null) this.details = new LinkedHashMap<>();
+            if (this.details == null) {
+                this.details = new LinkedHashMap<>();
+            }
+
             var key = "reasons";
             var existing = this.details.get(key);
 
@@ -105,68 +100,63 @@ public final class DecisionResult {
             }
         }
 
-        // --- Compatibility with DecisionEngine explainability/details ---
-
-        /**
-         * DecisionEngine kasutab explain välja;
-         * mapime selle message väljale.
-         */
+        /** Compatibility alias for message. */
         public Builder explain(String explain) {
             this.message = explain;
             return this;
         }
 
-        /** Lisab riskiskoori detailide hulka. */
+        /** Adds risk score detail. */
         public Builder riskScore(Double riskScore) {
             putDetail("riskScore", riskScore);
             return this;
         }
 
-        /** Märgib, kas reserve limiit on ületatud. */
+        /** Adds reserve limit detail. */
         public Builder reserveLimitExceeded(Boolean reserveLimitExceeded) {
             putDetail("reserveLimitExceeded", reserveLimitExceeded);
             return this;
         }
 
-        /** Märgib, kas allocation oli teostatav. */
+        /** Adds allocation feasibility detail. */
         public Builder allocationFeasible(Boolean allocationFeasible) {
             putDetail("allocationFeasible", allocationFeasible);
             return this;
         }
 
-        /**
-         * Üldine detailide lisamise abimeetod.
-         */
+        /** Adds a generic detail entry. */
         private void putDetail(String key, Object value) {
-            if (this.details == null) this.details = new LinkedHashMap<>();
+            if (this.details == null) {
+                this.details = new LinkedHashMap<>();
+            }
             this.details.put(key, value);
         }
 
-        /** Seadistab allowed välja. */
+        /** Sets allowed state. */
         public Builder allowed(boolean allowed) {
             this.allowed = allowed;
             return this;
         }
 
-        /** Seadistab peamise otsuse põhjuse. */
+        /** Sets the primary reason. */
         public Builder reason(DecisionReason reason) {
             this.reason = reason;
             return this;
         }
 
-        /** Seadistab selgitava sõnumi. */
+        /** Sets the message. */
         public Builder message(String message) {
             this.message = message;
             return this;
         }
 
-        /** Asendab detailide kaardi täielikult. */
+        /** Replaces the full details map. */
         public Builder details(Map<String, Object> details) {
             this.details = details;
             return this;
         }
 
-        /** Lõplik objekti konstrueerimine. */
+        /** Builds the immutable result. */
         public DecisionResult build() {
             return new DecisionResult(allowed, reason, message, details);
         }
