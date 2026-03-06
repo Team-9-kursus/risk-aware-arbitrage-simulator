@@ -1,12 +1,10 @@
 package com.riskaware.arbitrage.core.decision;
 
 /**
- * Otsuse põhjused, miks simulatsioon lubatakse või blokeeritakse.
+ * Reasons explaining why a decision is GO or NO-GO.
  *
- * NB!
- * - Enum väärtusi ei tohi ümber nimetada.
- * - Väärtusi kasutatakse logides, dokumentatsioonis ja UI selgitustes.
- * - Uusi põhjuseid võib lisada, olemasolevaid ei muudeta.
+ * Do not rename existing values.
+ * They may be used in logs, APIs and UI explanations.
  */
 public enum DecisionReason {
 
@@ -14,18 +12,18 @@ public enum DecisionReason {
     RISK_TOO_HIGH,
     RISK_REPORT_MISSING,
 
-    // Reservipiirangud
+    // Reserve constraints
     RESERVE_LIMIT_EXCEEDED,
     RESERVE_STATE_MISSING,
 
-    // Jaotuse teostatavus
+    // Allocation feasibility
     ALLOCATION_NOT_FEASIBLE,
     ALLOCATION_MISSING,
 
-    // Arbitraaživõimaluse kehtivus
+    // Opportunity validation
     NO_OPPORTUNITIES,
 
-    // Poliitikapõhine / muu
+    // Policy / fallback
     POLICY_BLOCKED,
     ALLOWED
 }
